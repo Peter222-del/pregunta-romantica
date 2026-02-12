@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Pregunta importante</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      font-family: Arial, sans-serif;
+      background: #ffe6f0;
+      overflow: hidden;
+    }
+
+    img {
+      width: 250px;
+      transition: transform 0.3s, opacity 0.3s;
+    }
+
+    .buttons {
+      margin-top: 20px;
+      display: flex;
+      gap: 20px;
+    }
+
+    button {
+      padding: 12px 24px;
+      font-size: 18px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+
+    #yesBtn {
+      background-color: #4CAF50;
+      color: white;
+    }
+
+    #noBtn {
+      background-color: #f44336;
+      color: white;
+    }
+
+    .message {
+      font-size: 28px;
+      font-weight: bold;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <img id="mainImage" src="imagen.png" alt="Imagen">
+
+  <div class="buttons">
+    <button id="yesBtn">Sí</button>
+    <button id="noBtn">No</button>
+  </div>
+
+  <div class="message" id="finalMessage">
+    ¡Yay! 🎉 Sabía que dirías que sí 💖
+  </div>
+
+  <script>
+    const yesBtn = document.getElementById("yesBtn");
+    const noBtn = document.getElementById("noBtn");
+    const image = document.getElementById("mainImage");
+    const finalMessage = document.getElementById("finalMessage");
+
+    let yesScale = 1;
+    let noCount = 0;
+
+    const noMessages = [
+      "¿Segura que no?",
+      "¿Muy segura?",
+      "Piénsalo bien 👀",
+      "No seas mala 😢",
+      "Ándale que sí 🥺",
+      "Última oportunidad 😳"
+    ];
+
+    noBtn.addEventListener("click", () => {
+      yesScale += 0.3;
+      yesBtn.style.transform = `scale(${yesScale})`;
+
+      noBtn.textContent = noMessages[noCount % noMessages.length];
+      noCount++;
+
+      if (yesScale >= 2.5) {
+        image.style.opacity = "0";
+        image.style.transform = "translateY(-200px)";
+      }
+    });
+
+    yesBtn.addEventListener("click", () => {
+      document.querySelector(".buttons").style.display = "none";
+      image.style.display = "none";
+      finalMessage.style.display = "block";
+    });
+  </script>
+
+</body>
+</html>
